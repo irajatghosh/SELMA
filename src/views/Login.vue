@@ -5,7 +5,7 @@
       <v-divider></v-divider>
       <v-card-text>
         <div class="mb-4 text-center">
-          <v-radio-group v-model="row" row mandatory>
+          <v-radio-group v-model="role" row mandatory>
             <v-radio
               v-for="item in loginOptions"
               :key="item.id"
@@ -35,6 +35,9 @@
           <div v-if="warning">
             Login failed. Please enter correct username and password.
           </div>
+          <div v-else>
+            {{ error }}
+          </div>
           <div class="text-center">
             <v-btn
               depressed
@@ -58,7 +61,8 @@ export default {
       username: "",
       password: "",
       warning: false,
-      row: null,
+      error: "",
+      role: null,
       loginOptions: [
         { id: "l1", title: "Student" },
         { id: "l2", title: "Professor" },
@@ -69,6 +73,19 @@ export default {
   methods: {
     login() {
       console.log("Login", this.row);
+      try {
+        if (this.username === "" || this.password === "") {
+          this.warning = true;
+          return;
+        }
+        this.$store.dispatch("login", {
+          username: this.username,
+          password: this.password,
+          role: this.role,
+        });
+      } catch (err) {
+        this.error = err.message || "User not found. Check the details again.";
+      }
     },
   },
 };

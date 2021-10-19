@@ -28,6 +28,24 @@ const routes = [
     component: () =>
       import(/* webpackChunkName: "Login" */ "../views/Login.vue"),
   },
+  {
+    path: "/admin",
+    name: "Admin",
+    // route level code-splitting
+    // this generates a separate chunk (Admin.[hash].js) for this route
+    // which is lazy-loaded when the route is visited.
+    component: () =>
+      import(/* webpackChunkName: "Admin" */ "../views/AdminHome.vue"),
+  },
+  {
+    path: "/addaccounts",
+    name: "AddAccounts",
+    // route level code-splitting
+    // this generates a separate chunk (AddAccounts.[hash].js) for this route
+    // which is lazy-loaded when the route is visited.
+    component: () =>
+      import(/* webpackChunkName: "Admin" */ "../views/AddAccounts.vue"),
+  },
 ];
 
 const router = new VueRouter({
