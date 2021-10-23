@@ -21,7 +21,7 @@ export default {
     context.commit("updateExams", { payload, foundIndex });
   },
   deleteExam(context, payload) {
-    const foundIndex = EXAMS.findIndex((item) => item.id === payload.id);
+    const foundIndex = EXAMS.findIndex((item) => item.id === payload);
 
     context.commit("deleteExam", foundIndex);
   },
@@ -81,8 +81,19 @@ export default {
         return user;
       }
     });
+    const modifiedUsers = filteredUsers.map((m) => ({
+      ...m,
+      status: "Not Evaluated",
+      examId: payload.id,
+    }));
+    console.log("in action modifier", modifiedUsers);
     console.log("in action", filteredUsers);
-    context.commit("setParticipants", filteredUsers);
+    context.commit("setParticipants", modifiedUsers);
+  },
+
+  updateParticipantListAfterEvaluation(context, payload) {
+    const { foundIndex, data } = payload;
+    context.commit("updateParticipantsArray", { foundIndex, data });
   },
 
   // console.log("student data after search", participantData);

@@ -116,11 +116,16 @@ export default {
     addGrade(data) {
       console.log("in data table", data);
 
-      Object.assign(this.examData[this.editedIndex], data);
+      //Object.assign(this.examData[this.editedIndex], data);
 
       this.$store.dispatch("addGrade", data);
       console.log("grades are", this.$store.getters.getResults);
-
+      const foundIndex = this.editedIndex;
+      this.$store.dispatch("updateParticipantListAfterEvaluation", {
+        foundIndex,
+        data,
+      });
+      this.examData = this.$store.getters.getParticipants;
       console.log("after change", this.examData);
       this.closeFormDialog();
     },

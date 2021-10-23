@@ -190,6 +190,7 @@ export default {
         console.log("getting the exam array", this.$store.getters.getExams);
         this.close();
       } else {
+        console.log("exams data", data);
         this.$store.dispatch("addExams", data);
         this.close();
       }

@@ -20,4 +20,12 @@ export default {
   setParticipants(state, payload) {
     state.participants = payload;
   },
+  updateParticipantsArray(state, payload) {
+    console.log(
+      "in mutations after evaluate",
+      payload.foundIndex,
+      payload.data
+    );
+    state.participants.splice(payload.foundIndex, 1, payload.data);
+  },
 };

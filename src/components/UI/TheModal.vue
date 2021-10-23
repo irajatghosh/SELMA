@@ -16,11 +16,19 @@
                 ></v-text-field>
               </v-col>
               <v-col cols="12" sm="6" md="6">
-                <v-select
+                <!-- <v-select
                   v-model="data.professor"
                   :items="getProfessors"
                   label="Professor"
-                ></v-select>
+                ></v-select> -->
+                <v-select
+                  :items="getProfessors"
+                  label="Professor"
+                  item-text="fullname"
+                  return-object
+                  @change="onSelectProfessor"
+                >
+                </v-select>
               </v-col>
               <v-col cols="12" sm="6" md="4">
                 <v-menu
@@ -104,6 +112,7 @@ export default {
     return {
       menu2: false,
       warning: false,
+      selectedProfessor: null,
     };
   },
   computed: {
@@ -121,15 +130,9 @@ export default {
     getProfessors() {
       console.log("professors", this.$store.getters.getUsers);
       const professorsList = this.$store.getters.getProfessors;
-      console.log(
-        "name and username",
-        professorsList.map((p) => ({
-          id: p.id,
-          fullname: p.fullname,
-          username: p.username,
-        }))
-      );
-      return professorsList.map((p) => p.username);
+      console.log("name and username", professorsList);
+      // professorsList.map((p) => p.username);
+      return professorsList;
     },
   },
 
@@ -138,6 +141,11 @@ export default {
       this.warning = false;
       this.$emit("close");
     },
+    onSelectProfessor(item) {
+      this.data.professor = item.username;
+
+      console.log("on select professor", this.data.professor);
+    },
     save() {
       if (
         !this.data.subject ||
@@ -145,9 +153,8 @@ export default {
         !this.data.date ||
         !this.data.time ||
         this.data.subject.trim().length === 0 ||
-        !this.data.professor.trim().length === 0 ||
-        !this.data.date.trim().length === 0 ||
-        !this.data.time.trim().length === 0
+        this.data.date.trim().length === 0 ||
+        this.data.time.trim().length === 0
       ) {
         this.warning = true;
         return;

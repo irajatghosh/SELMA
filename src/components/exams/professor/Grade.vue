@@ -132,6 +132,7 @@ export default {
     // },
     onSelectExam(item) {
       this.selectedExam = item;
+
       // console.log("seletced subject", item);
     },
     search() {
@@ -141,15 +142,16 @@ export default {
         this.selectedExam
       );
       const participantsDetail = this.$store.getters.getParticipants;
-      const modifiedData = participantsDetail.map((m) => ({
-        ...m,
-        status: "Not Evaluated",
-        examId: this.selectedExam.id,
-        subject: this.selectedExam.subject,
-      }));
+      // const modifiedData = participantsDetail.map((m) => ({
+      //   ...m,
+      //   status: "Not Evaluated",
+      //   examId: this.selectedExam.id,
+      //   subject: this.selectedExam.subject,
+      // }));
 
-      console.log("modified data", modifiedData);
-      this.participants = modifiedData;
+      //console.log("modified data", modifiedData);
+      console.log("new data", participantsDetail);
+      this.participants = participantsDetail;
 
       console.log("actual data", this.participants);
     },
