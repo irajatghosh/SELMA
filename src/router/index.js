@@ -29,13 +29,13 @@ const routes = [
       import(/* webpackChunkName: "Login" */ "../views/Login.vue"),
   },
   {
-    path: "/admin",
-    name: "Admin",
+    path: "/main",
+    name: "MainPage",
     // route level code-splitting
     // this generates a separate chunk (Admin.[hash].js) for this route
     // which is lazy-loaded when the route is visited.
     component: () =>
-      import(/* webpackChunkName: "Admin" */ "../views/AdminHome.vue"),
+      import(/* webpackChunkName: "Admin" */ "../views/MainPage.vue"),
   },
   {
     path: "/addaccounts",
@@ -45,6 +45,42 @@ const routes = [
     // which is lazy-loaded when the route is visited.
     component: () =>
       import(/* webpackChunkName: "Admin" */ "../views/AddAccounts.vue"),
+  },
+  {
+    path: "/exams",
+    name: "Exams",
+    // route level code-splitting
+    // this generates a separate chunk (ExamLists.[hash].js) for this route
+    // which is lazy-loaded when the route is visited.
+    component: () =>
+      import(/* webpackChunkName: "Admin" */ "../views/Exams.vue"),
+  },
+  {
+    path: "/registeredexams",
+    name: "RegisteredExams",
+    // route level code-splitting
+    // this generates a separate chunk (ExamLists.[hash].js) for this route
+    // which is lazy-loaded when the route is visited.
+    component: () =>
+      import(/* webpackChunkName: "Admin" */ "../views/RegisteredExams.vue"),
+  },
+  {
+    path: "/assigned",
+    name: "AssignedExams",
+    // route level code-splitting
+    // this generates a separate chunk (ExamLists.[hash].js) for this route
+    // which is lazy-loaded when the route is visited.
+    component: () =>
+      import(/* webpackChunkName: "Admin" */ "../views/AssignedExams.vue"),
+  },
+  {
+    path: "/grade",
+    name: "Grade",
+    // route level code-splitting
+    // this generates a separate chunk (ExamLists.[hash].js) for this route
+    // which is lazy-loaded when the route is visited.
+    component: () =>
+      import(/* webpackChunkName: "Admin" */ "../views/Grading.vue"),
   },
 ];
 

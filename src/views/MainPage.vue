@@ -1,6 +1,6 @@
 <template>
   <v-container>
-    <h1>Admin page</h1>
+    <h1>Main page</h1>
     <v-row>
       <v-col cols="6">
         <the-menu></the-menu>

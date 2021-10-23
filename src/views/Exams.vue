@@ -1,11 +1,15 @@
 <template>
   <v-container>
-    <h2>Exam Lists</h2>
+    <h2>Exam Dashboard</h2>
+    <exam-lists />
   </v-container>
 </template>
 
 <script>
-export default {};
+import ExamLists from "../components/exams/ExamLists.vue";
+export default {
+  components: { ExamLists },
+};
 </script>
 
 <style></style>

@@ -1,9 +1,9 @@
 <template>
   <section>
-    <v-row dense>
+    <v-row dense v-if="auth">
       <v-col
         class="text-center"
-        v-for="item in items"
+        v-for="item in auth"
         :key="item.title"
         :cols="item.flex"
       >
@@ -13,6 +13,7 @@
           flat
           class="primary"
           :disabled="item.disabled"
+          @click="router.push(item.to)"
         >
           <v-card-text>
             <v-icon size="35">
@@ -35,13 +36,15 @@
 export default {
   data() {
     return {
-      items: [
+      router: this.$router,
+
+      admin: [
         {
           title: "Create Account",
           icon: "group_add",
           flex: 6,
-          disabled: false,
-          to: "/status",
+
+          to: "/addaccounts",
         },
         {
           title: "View Accounts",
@@ -51,28 +54,81 @@ export default {
           to: "",
         },
         {
-          title: "Add exams",
+          title: "Exams",
           icon: "library_books",
           flex: 6,
-          disabled: false,
+
+          to: "/exams",
+        },
+      ],
+      professors: [
+        {
+          title: "Assigned Exams",
+          icon: "assignment",
+          flex: 6,
+
+          to: "/assigned",
+        },
+        {
+          title: "Grade Exams",
+          icon: "grading",
+          flex: 6,
+
+          to: "/grade",
+        },
+        {
+          title: "View Requests",
+          icon: "email",
+          flex: 6,
+
+          to: "/exams",
+        },
+      ],
+      students: [
+        {
+          title: "Register Exams",
+          icon: "create",
+          flex: 6,
+          to: "/exams",
+        },
+        {
+          title: "View Exams",
+          icon: "content_paste_search",
+          flex: 6,
+
+          to: "/registeredexams",
+        },
+        {
+          title: "Results",
+          icon: "grade",
+          flex: 6,
+
           to: "/control",
         },
         {
-          title: "Assign exams ",
-          icon: "assignment_return",
+          title: "Request",
+          icon: "contact_mail",
           flex: 6,
 
-          to: "",
-        },
-        {
-          title: "Delete exams",
-          icon: "delete",
-          flex: 6,
-
-          to: "",
+          to: "/control",
         },
       ],
     };
+  },
+  computed: {
+    auth() {
+      console.log("this auth is triggered");
+      const user = this.$store.getters.getUser;
+      console.log("user array", user.role);
+
+      if (user.role === "Student") {
+        return this.students;
+      } else if (user.role === "Admin") {
+        return this.admin;
+      } else {
+        return this.professors;
+      }
+    },
   },
 };
 </script>

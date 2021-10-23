@@ -24,4 +24,8 @@ export default {
     console.log("in action", foundUser);
     context.commit("setUser", foundUser);
   },
+
+  logout(context) {
+    context.commit("logout");
+  },
 };

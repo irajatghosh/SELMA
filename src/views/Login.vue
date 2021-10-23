@@ -83,6 +83,7 @@ export default {
           password: this.password,
           role: this.role,
         });
+        this.$router.replace("/main");
       } catch (err) {
         this.error = err.message || "User not found. Check the details again.";
       }
