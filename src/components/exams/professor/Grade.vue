@@ -15,31 +15,64 @@
           >
           </v-select>
           <v-btn class="success" depressed @click="search">Search</v-btn>
+          <v-btn
+            dark
+            class="pink lighten-1 ml-2"
+            depressed
+            @click="$router.replace('/main')"
+            >Back</v-btn
+          >
         </form>
       </v-card-text>
     </v-card>
-    <the-data-table :headers="headers" :examData="participants" :role="role" />
+    <the-data-table
+      :headers="headers"
+      :examData="participants"
+      :role="role"
+      @openForm="formDialogOpen"
+    />
+    <!-- <the-form
+      v-if="formDialog"
+      :visible="formDialog"
+      :data="formData"
+      @close="closeFormDialog"
+      @save="addGrade"
+    /> -->
   </section>
 </template>
 
 <script>
 import TheDataTable from "../../UI/TheDataTable.vue";
+//import TheForm from "../../UI/TheForm.vue";
 export default {
-  components: { TheDataTable },
+  components: {
+    TheDataTable,
+    // TheForm
+  },
   data() {
     return {
+      formDialog: false,
       headers: [
         {
           text: "Fullname",
           align: "start",
           sortable: false,
           value: "fullname",
+          disabled: false,
         },
         {
           text: "Username",
           align: "start",
           sortable: false,
           value: "username",
+          disabled: false,
+        },
+        {
+          text: "Status",
+          align: "start",
+          sortable: false,
+          value: "status",
+          disabled: false,
         },
 
         { text: "Actions", value: "actions", sortable: false },
@@ -49,14 +82,11 @@ export default {
       examDetails: [],
       participants: [],
       role: "",
+      formData: null,
     };
   },
   computed: {
     subjects() {
-      // const subjectName = this.examDetails.map((s) => {
-      //   return s.subject;
-      // });
-      // console.log("subject name", subjectName);
       return this.examDetails;
     },
     assignedExam() {
@@ -77,15 +107,29 @@ export default {
       this.$store.dispatch("viewAssignedExams", username);
       const examData = this.$store.getters.getAssignedExams;
       console.log("in component", this.role);
-      // const filteredData = examData.map((e) => ({
-      //   subject: e.subject,
-      //   date: e.date,
-      //   time: e.time,
-      // }));
-      // this.examDetails = filteredData;
+
       this.examDetails = examData;
       console.log("professor data", this.examDetails);
     },
+    formDialogOpen(data) {
+      console.log(data);
+      this.formData = {
+        ...data,
+        examId: this.selectedExam.id,
+        subject: this.selectedExam.subject,
+      };
+
+      console.log("the form data", this.formData);
+      this.formDialog = true;
+    },
+    // closeFormDialog() {
+    //   this.formDialog = false;
+    // },
+    // addGrade(data) {
+    //   console.log(data);
+    //   this.$store.dispatch("addGrade", data);
+    //   console.log("grades are", this.$store.getters.getResults);
+    // },
     onSelectExam(item) {
       this.selectedExam = item;
       // console.log("seletced subject", item);
@@ -97,8 +141,16 @@ export default {
         this.selectedExam
       );
       const participantsDetail = this.$store.getters.getParticipants;
+      const modifiedData = participantsDetail.map((m) => ({
+        ...m,
+        status: "Not Evaluated",
+        examId: this.selectedExam.id,
+        subject: this.selectedExam.subject,
+      }));
 
-      this.participants = participantsDetail;
+      console.log("modified data", modifiedData);
+      this.participants = modifiedData;
+
       console.log("actual data", this.participants);
     },
   },
