@@ -141,7 +141,7 @@ export default {
 
     addGrade(data) {
       this.$store.dispatch("addGrade", data);
-      console.log("after adding grade", this.$store.getters.getResults);
+
       const foundIndex = this.editedIndex;
       this.$store.dispatch("updateParticipantListAfterEvaluation", {
         foundIndex,
