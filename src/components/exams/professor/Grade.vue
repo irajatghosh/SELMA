@@ -14,6 +14,7 @@
             return-object
           >
           </v-select>
+          <p class="error--text" v-if="warning">Please select subject</p>
           <v-btn class="success" depressed @click="search">Search</v-btn>
           <v-btn
             dark
@@ -52,6 +53,7 @@ export default {
   data() {
     return {
       formDialog: false,
+      warning: false,
       headers: [
         {
           text: "Fullname",
@@ -123,6 +125,11 @@ export default {
       this.selectedExam = item;
     },
     search() {
+      if (!this.subjectName) {
+        this.warning = true;
+        return;
+      }
+      this.warning = false;
       this.$store.dispatch(
         "findSubjectRegisteredParticipants",
         this.selectedExam

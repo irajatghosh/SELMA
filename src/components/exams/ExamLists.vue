@@ -59,7 +59,7 @@
     <the-modal
       :mode="mode"
       :visible="dialog"
-      :title="formTitle"
+      :title="title"
       :data="editedItem"
       :error="error"
       :message="message"
@@ -78,6 +78,7 @@ export default {
   data: () => ({
     dialog: false,
     dialogDelete: false,
+    title: "",
     headers: [
       {
         text: "Subject",
@@ -88,7 +89,6 @@ export default {
       { text: "Date", value: "date" },
       { text: "Time", value: "time" },
       { text: "Professor", value: "professor" },
-
       { text: "Actions", value: "actions", sortable: false },
     ],
     examData: [],
@@ -112,16 +112,14 @@ export default {
       professor: "",
     },
   }),
-
   computed: {
-    formTitle() {
-      return this.editedIndex === -1 ? "Add New Exam" : "Edit Exam";
-    },
+    // formTitle() {
+    //   return this.editedIndex === -1 ? "Add New Exam" : "Edit Exam";
+    // },
     auth() {
       return this.$store.getters.getUser;
     },
   },
-
   watch: {
     dialog(val) {
       val || this.close();
@@ -130,27 +128,25 @@ export default {
       val || this.closeDelete();
     },
   },
-
   created() {
     this.initialize();
   },
   methods: {
     initialize() {
+      console.log("exams", this.$store.getters.getExams);
       this.examData = this.$store.getters.getExams;
     },
-
     backToMain() {
       this.$router.replace("/main");
     },
-
     openAddModal() {
       this.mode = "add";
+      this.title = "Add exam";
       this.dialog = true;
     },
-
     editItem(item) {
       this.mode = "edit";
-
+      this.title = "Edit exam";
       this.editedIndex = this.examData.indexOf(item);
       this.editedItem = Object.assign({}, item);
       this.dialog = true;
@@ -162,7 +158,6 @@ export default {
       this.editedItem = Object.assign({}, item);
       this.dialog = true;
     },
-
     close() {
       this.dialog = false;
       this.$nextTick(() => {
@@ -170,7 +165,6 @@ export default {
         this.editedIndex = -1;
       });
     },
-
     closeDelete() {
       this.dialogDelete = false;
       this.$nextTick(() => {
@@ -181,26 +175,22 @@ export default {
     save(data) {
       if (this.editedIndex > -1) {
         this.$store.dispatch("updateExams", data);
-
         this.close();
       } else {
         this.$store.dispatch("addExams", data);
         this.close();
       }
     },
-
     register(item) {
       try {
         const { id: userId } = this.$store.getters.getUser;
-
         const examId = item.id;
-
         this.$store.dispatch("registerExam", { userId, examId });
-
         this.message = "Examination registration completed!";
         this.error = "";
         this.dialog = true;
       } catch (error) {
+        this.message = "";
         this.error = error.message || "Exam already registered!";
         this.dialog = true;
       }

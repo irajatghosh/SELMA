@@ -46,13 +46,7 @@ export default {
 
           to: "/addaccounts",
         },
-        {
-          title: "View Accounts",
-          icon: "people",
-          flex: 6,
 
-          to: "",
-        },
         {
           title: "Exams",
           icon: "library_books",

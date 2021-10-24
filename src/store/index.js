@@ -10,14 +10,6 @@ import grades from "./modules/grades/index";
 Vue.use(Vuex);
 
 export default new Vuex.Store({
-  // state: {
-  // },
-  // mutations: {
-  // },
-  // actions: {
-  // },
-  // modules: {
-  // }
   modules: {
     auth,
     users,

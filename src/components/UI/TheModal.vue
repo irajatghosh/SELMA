@@ -16,11 +16,6 @@
                 ></v-text-field>
               </v-col>
               <v-col cols="12" sm="6" md="6">
-                <!-- <v-select
-                  v-model="data.professor"
-                  :items="getProfessors"
-                  label="Professor"
-                ></v-select> -->
                 <v-select
                   :items="getProfessors"
                   label="Professor"
@@ -126,6 +121,9 @@ export default {
         }
       },
     },
+    getItem() {
+      return this.data.professor;
+    },
 
     getProfessors() {
       const professorsList = this.$store.getters.getProfessors;
@@ -161,7 +159,7 @@ export default {
     },
     deleteItemConfirm() {
       if (this.mode === "deregister") {
-        this.close();
+        this.$emit("confirm");
         return;
       }
       this.$store.dispatch("deleteExam", this.data.id);

@@ -74,3 +74,5 @@ export const EXAMS = [
     participants: ["s1"],
   },
 ];
+
+export const RESULTS = [];

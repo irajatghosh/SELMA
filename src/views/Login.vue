@@ -72,7 +72,6 @@ export default {
   },
   methods: {
     login() {
-      console.log("Login", this.row);
       try {
         if (this.username === "" || this.password === "") {
           this.warning = true;

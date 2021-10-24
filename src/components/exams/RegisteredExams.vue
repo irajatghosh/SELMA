@@ -47,7 +47,7 @@
             rounded
             depressed
             class="primary text-capitalize"
-            @click="deRegister(item)"
+            @click="openDeregisterConfirmModal(item)"
             >De-Register</v-btn
           >
         </template>
@@ -58,6 +58,7 @@
       :visible="dialog"
       :message="message"
       @close="close"
+      @confirm="deRegister"
     ></the-modal>
   </section>
 </template>
@@ -73,6 +74,7 @@ export default {
       dialog: false,
       mode: "",
       search: "",
+      examId: null,
 
       message: "",
 
@@ -102,14 +104,21 @@ export default {
       this.$store.dispatch("setRegisteredExam", { userId });
       this.registeredExam = this.$store.getters.getRegisteredExam;
     },
-    deRegister(item) {
-      const examId = item.id;
+    openDeregisterConfirmModal(item) {
+      this.examId = item.id;
       this.mode = "deregister";
-      const { id: userId } = this.$store.getters.getUser;
-      this.$store.dispatch("deRegister", { examId, userId });
-
       this.message = "You want to de-register?";
       this.dialog = true;
+    },
+    deRegister() {
+      this.dialog = false;
+      const examId = this.examId;
+
+      const { id: userId } = this.$store.getters.getUser;
+      this.$store.dispatch("deRegister", { examId, userId });
+      this.registeredExam = this.$store.getters.getRegisteredExam;
+      // this.message = "You want to de-register?";
+      // this.dialog = true;
     },
     close() {
       this.dialog = false;

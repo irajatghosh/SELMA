@@ -23,9 +23,6 @@ export default {
   components: {
     TheMenu,
   },
-  created() {
-    console.log("in student", this.$store.getters.getResults);
-  },
 };
 </script>
 

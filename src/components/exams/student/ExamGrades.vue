@@ -76,7 +76,10 @@ export default {
   },
   methods: {
     initialize() {
-      this.results = this.$store.getters.getResults;
+      const { id: userId } = this.$store.getters.getUser;
+      console.log("grades", this.$store.dispatch("searchGrade", userId));
+
+      this.results = this.$store.getters.getSingleResult;
     },
   },
 };
