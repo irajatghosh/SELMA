@@ -98,10 +98,9 @@ export default {
   methods: {
     initialize() {
       const { id: userId } = this.$store.getters.getUser;
-      console.log("in comp", userId);
+
       this.$store.dispatch("setRegisteredExam", { userId });
       this.registeredExam = this.$store.getters.getRegisteredExam;
-      console.log("registered data", this.registeredExam);
     },
     deRegister(item) {
       const examId = item.id;

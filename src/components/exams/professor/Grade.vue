@@ -106,54 +106,30 @@ export default {
 
       this.$store.dispatch("viewAssignedExams", username);
       const examData = this.$store.getters.getAssignedExams;
-      console.log("in component", this.role);
 
       this.examDetails = examData;
-      console.log("professor data", this.examDetails);
     },
     formDialogOpen(data) {
-      console.log(data);
       this.formData = {
         ...data,
         examId: this.selectedExam.id,
         subject: this.selectedExam.subject,
       };
 
-      console.log("the form data", this.formData);
       this.formDialog = true;
     },
-    // closeFormDialog() {
-    //   this.formDialog = false;
-    // },
-    // addGrade(data) {
-    //   console.log(data);
-    //   this.$store.dispatch("addGrade", data);
-    //   console.log("grades are", this.$store.getters.getResults);
-    // },
+
     onSelectExam(item) {
       this.selectedExam = item;
-
-      // console.log("seletced subject", item);
     },
     search() {
-      console.log("subject selected", this.subjectName);
       this.$store.dispatch(
         "findSubjectRegisteredParticipants",
         this.selectedExam
       );
       const participantsDetail = this.$store.getters.getParticipants;
-      // const modifiedData = participantsDetail.map((m) => ({
-      //   ...m,
-      //   status: "Not Evaluated",
-      //   examId: this.selectedExam.id,
-      //   subject: this.selectedExam.subject,
-      // }));
 
-      //console.log("modified data", modifiedData);
-      console.log("new data", participantsDetail);
       this.participants = participantsDetail;
-
-      console.log("actual data", this.participants);
     },
   },
 };

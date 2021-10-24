@@ -128,10 +128,8 @@ export default {
     },
 
     getProfessors() {
-      console.log("professors", this.$store.getters.getUsers);
       const professorsList = this.$store.getters.getProfessors;
-      console.log("name and username", professorsList);
-      // professorsList.map((p) => p.username);
+
       return professorsList;
     },
   },
@@ -144,8 +142,6 @@ export default {
     onSelectProfessor(item) {
       this.data.professor = item.username;
       this.data.professorName = item.fullname;
-
-      console.log("on select professor", this.data.professor);
     },
     save() {
       if (
@@ -164,13 +160,12 @@ export default {
       this.$emit("save", this.data);
     },
     deleteItemConfirm() {
-      console.log("delete", this.data);
       if (this.mode === "deregister") {
         this.close();
         return;
       }
       this.$store.dispatch("deleteExam", this.data.id);
-      console.log("after delete", this.$store.getters.getExams);
+
       this.close();
     },
   },

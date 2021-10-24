@@ -129,9 +129,6 @@ export default {
     dialogDelete(val) {
       val || this.closeDelete();
     },
-    examData(val) {
-      console.log("watch", val);
-    },
   },
 
   created() {
@@ -140,7 +137,6 @@ export default {
   methods: {
     initialize() {
       this.examData = this.$store.getters.getExams;
-      console.log("exam data", this.examData);
     },
 
     backToMain() {
@@ -153,8 +149,6 @@ export default {
     },
 
     editItem(item) {
-      console.log("item is", item);
-
       this.mode = "edit";
 
       this.editedIndex = this.examData.indexOf(item);
@@ -187,24 +181,22 @@ export default {
     save(data) {
       if (this.editedIndex > -1) {
         this.$store.dispatch("updateExams", data);
-        console.log("getting the exam array", this.$store.getters.getExams);
+
         this.close();
       } else {
-        console.log("exams data", data);
         this.$store.dispatch("addExams", data);
         this.close();
       }
     },
 
     register(item) {
-      console.log(this.$store.getters.getUser);
       try {
         const { id: userId } = this.$store.getters.getUser;
 
         const examId = item.id;
 
         this.$store.dispatch("registerExam", { userId, examId });
-        console.log("this is new data", this.$store.getters.getExams);
+
         this.message = "Examination registration completed!";
         this.error = "";
         this.dialog = true;

@@ -25,7 +25,6 @@ export default {
   components: { ContactForm },
   computed: {
     getProfessorData() {
-      console.log("professor data", this.$store.getters.getProfessors);
       return this.$store.getters.getProfessors;
     },
   },

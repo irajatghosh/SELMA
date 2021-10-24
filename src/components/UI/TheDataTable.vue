@@ -135,26 +135,20 @@ export default {
     formDialogOpen(item) {
       this.editedIndex = this.examData.indexOf(item);
       this.formData = item;
-      console.log("index", this.editedIndex);
-      console.log("the form data", this.formData);
 
       this.formDialog = true;
     },
 
     addGrade(data) {
-      console.log("in data table", data);
-
-      //Object.assign(this.examData[this.editedIndex], data);
-
       this.$store.dispatch("addGrade", data);
-      console.log("grades are", this.$store.getters.getResults);
+
       const foundIndex = this.editedIndex;
       this.$store.dispatch("updateParticipantListAfterEvaluation", {
         foundIndex,
         data,
       });
       this.examData = this.$store.getters.getParticipants;
-      console.log("after change", this.examData);
+
       this.closeFormDialog();
     },
     closeFormDialog() {

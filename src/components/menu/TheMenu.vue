@@ -60,6 +60,13 @@ export default {
 
           to: "/exams",
         },
+        {
+          title: "View Requests",
+          icon: "email",
+          flex: 6,
+
+          to: "/page-under-construction",
+        },
       ],
       professors: [
         {
@@ -81,7 +88,7 @@ export default {
           icon: "email",
           flex: 6,
 
-          to: "/exams",
+          to: "/page-under-construction",
         },
       ],
       students: [
@@ -110,16 +117,14 @@ export default {
           icon: "contact_mail",
           flex: 6,
 
-          to: "/page-under-construction",
+          to: "/contact",
         },
       ],
     };
   },
   computed: {
     auth() {
-      console.log("this auth is triggered");
       const user = this.$store.getters.getUser;
-      console.log("user array", user.role);
 
       if (user.role === "Student") {
         return this.students;

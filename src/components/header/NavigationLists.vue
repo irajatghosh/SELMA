@@ -25,7 +25,6 @@ export default {
   },
   computed: {
     loggedIn() {
-      console.log("login data", this.$store.getters.getUser);
       return this.$store.getters.getUser;
     },
   },

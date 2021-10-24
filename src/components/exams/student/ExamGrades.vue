@@ -67,7 +67,6 @@ export default {
 
   computed: {
     showResults() {
-      console.log("results is", this.results.length);
       return this.results;
     },
   },
@@ -78,7 +77,6 @@ export default {
   methods: {
     initialize() {
       this.results = this.$store.getters.getResults;
-      console.log("grades", this.results);
     },
   },
 };

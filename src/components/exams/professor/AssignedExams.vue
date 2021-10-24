@@ -54,14 +54,13 @@ export default {
 
       this.$store.dispatch("viewAssignedExams", username);
       const examData = this.$store.getters.getAssignedExams;
-      console.log("in component", examData);
+
       const filteredData = examData.map((e) => ({
         subject: e.subject,
         date: e.date,
         time: e.time,
       }));
       this.examDetails = filteredData;
-      console.log("professor data", this.examDetails);
     },
   },
 };
