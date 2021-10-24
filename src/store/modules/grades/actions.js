@@ -7,7 +7,7 @@ export default {
       sudentId: payload.id,
       examId: payload.examId,
       //   name: payload.fullname,
-      //   subject: payload.subject,
+      subject: payload.subject,
       grade: payload.grade,
     };
     console.log("results", gradeData);

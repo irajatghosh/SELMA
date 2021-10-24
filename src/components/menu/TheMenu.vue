@@ -103,14 +103,14 @@ export default {
           icon: "grade",
           flex: 6,
 
-          to: "/control",
+          to: "/results",
         },
         {
-          title: "Request",
+          title: "Contact",
           icon: "contact_mail",
           flex: 6,
 
-          to: "/control",
+          to: "/page-under-construction",
         },
       ],
     };

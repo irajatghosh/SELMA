@@ -1,6 +1,23 @@
 <template>
   <section>
-    <v-data-table :headers="headers" :items="examData" class="elevation-1">
+    <v-toolbar v-if="showSearch" dark color="pink lighten-1 mt-4" class="mb-1">
+      <v-text-field
+        v-model="search"
+        clearable
+        flat
+        solo-inverted
+        hide-details
+        prepend-inner-icon="mdi-magnify"
+        label="Search"
+      ></v-text-field>
+      <v-btn class="ml-2" @click="$router.replace('/main')">Back</v-btn>
+    </v-toolbar>
+    <v-data-table
+      :headers="headers"
+      :items="examData"
+      :search="search"
+      class="elevation-1 mt-4"
+    >
       <template v-if="title" v-slot:top>
         <v-toolbar flat>
           <v-toolbar-title>{{ title }} </v-toolbar-title>
@@ -28,6 +45,16 @@
             Add Exam
           </v-btn>
         </v-toolbar>
+      </template>
+      <template v-slot:item.grade="{ item }">
+        <v-chip dark>
+          {{ item.grade }}
+        </v-chip>
+      </template>
+      <template v-slot:item.status="{ item }">
+        <v-chip small dark class="success">
+          {{ item.status }}
+        </v-chip>
       </template>
       <template v-slot:item.actions="{ item }">
         <v-btn
@@ -85,7 +112,7 @@
 import TheForm from "./TheForm.vue";
 export default {
   components: { TheForm },
-  props: ["headers", "examData", "title", "role"],
+  props: ["headers", "examData", "title", "role", "showSearch"],
   data() {
     return {
       formDialog: false,
@@ -93,6 +120,7 @@ export default {
       status: false,
       showEvaluate: false,
       editedIndex: -1,
+      search: "",
     };
   },
   computed: {

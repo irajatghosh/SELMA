@@ -143,6 +143,7 @@ export default {
     },
     onSelectProfessor(item) {
       this.data.professor = item.username;
+      this.data.professorName = item.fullname;
 
       console.log("on select professor", this.data.professor);
     },

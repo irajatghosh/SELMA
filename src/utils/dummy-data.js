@@ -52,6 +52,7 @@ export const EXAMS = [
     date: "2021-10-30",
     time: "10:00",
     professor: "p1@test.com",
+    professorFullName: "Martin Thomas",
     participants: ["s1", "s2"],
   },
   {
@@ -60,6 +61,7 @@ export const EXAMS = [
     date: "2021-11-10",
     time: "10:00",
     professor: "p2@test.com",
+    professorFullName: "Lucas George",
     participants: ["s1"],
   },
   {
@@ -68,6 +70,7 @@ export const EXAMS = [
     date: "2021-11-10",
     time: "10:00",
     professor: "p1@test.com",
+    professorFullName: "Martin Thomas",
     participants: ["s1"],
   },
 ];

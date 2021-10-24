@@ -9,6 +9,7 @@ export default {
       date: payload.date,
       time: payload.time,
       professor: payload.professor,
+      professorFullName: payload.professorName,
       participants: [],
     };
     console.log("action exam data", examDetails);
@@ -85,6 +86,9 @@ export default {
       ...m,
       status: "Not Evaluated",
       examId: payload.id,
+      subject: payload.subject,
+      professorId: payload.professor,
+      professorName: payload.professorFullName,
     }));
     console.log("in action modifier", modifiedUsers);
     console.log("in action", filteredUsers);
